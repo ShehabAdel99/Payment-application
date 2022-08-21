@@ -5,7 +5,7 @@ EN_TerminalError_t getTransactionDate(ST_terminalData_t *termData)
 {
  
     printf("Enter the Transaction Date\n");
-    scanf_s("%s",termData ->transactionDate);
+    scanf("%s",termData ->transactionDate);
 
 
     if ((sizeof (termData ->transactionDate)> 11*sizeof(uint8_t))||
