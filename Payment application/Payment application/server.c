@@ -21,9 +21,9 @@ ST_accountsDB_t accounts[255] = {
 	{9851.1,RUNNING,"99558824446663"},
 };
 
-//accounts[1] = { {2000.0,RUNNING,"2564856474123698"} };
+int index;      // get needed account index in DB
 
-ST_transaction_t transaction[255] = {0,0,DECLINED_INSUFFECIENT_FUND,0};
+ST_transaction_t transactions[255] = {0,0,DECLINED_INSUFFECIENT_FUND,0};
 
 //bool account_found(ST_transaction_t* transData, ST_accountsDB_t arr[]) {
 //	for (int i = 1; i < 255; i++)
@@ -34,6 +34,8 @@ ST_transaction_t transaction[255] = {0,0,DECLINED_INSUFFECIENT_FUND,0};
 //	return false;
 //};
 
+
+//under progress
 EN_transState_t recieveTransactionData(ST_transaction_t* transData)
 {
 	//if (transData->cardHolderData.PAN==accounts[0].PAN)            // first if doesn't work//////////////
@@ -43,39 +45,70 @@ EN_transState_t recieveTransactionData(ST_transaction_t* transData)
 	//}
 
 	return FRAUD_CARD;
-}
+};
 
-EN_serverError_t isValidAccount(ST_CardData_t cardData, ST_accountsDB_t accountRefrence)
+
+//under progress
+EN_serverError_t isValidAccount(ST_CardData_t cardData, ST_accountsDB_t accountRefrence[])
 {
 
-	if (cardData.PAN == accountRefrence.PAN) {         // first if doesn't work//////////////
-		printf("found");
+	for (int i = 0; i < 255; i++)
+	{
+		if (cardData.PAN == accountRefrence[i].PAN) {       // first if doesn't work//////////////
+			index = i;
+			printf("found");
+			return SERVER_OK;
+		}
 	}
-	printf("not found");
+		printf("not found");
 
-	return ACCOUNT_NOT_FOUND;
-}
+		return ACCOUNT_NOT_FOUND;
+	
+};
 
-EN_serverError_t isBlockedAccount(ST_accountsDB_t* accountRefrence)
+
+//Done
+EN_serverError_t isBlockedAccount(ST_accountsDB_t* accountRefrence[])
 {
+	if (accountRefrence[index]->state == BLOCKED) {
+		return BLOCKED_ACCOUNT;
+	}
 	return SERVER_OK;
-}
 
+};
+
+
+//Done
 EN_serverError_t isAmountAvailabe(ST_terminalData_t* termData)
 {
-	return SERVER_OK;
-}
+	if (termData->transAmount > accounts[index].balance) {
+		return LOW_BALANCE;
+	}
 
+	return SERVER_OK;
+};
+
+
+//under progress
 EN_serverError_t saveTransaction(ST_transaction_t* transData)
 {
-	return SERVER_OK;
-}
 
+	return SERVER_OK;
+};
+
+
+//Done
 EN_serverError_t getTransaction(uint32_t transactionSequenceNumber, ST_transaction_t* transData)
 {
-	return SERVER_OK;
-}
+	for (int i = 0; i < 255; i++)
+	{
+		if (transData->transactionSequenceNumber == transactions[i].transactionSequenceNumber) {
 
+			return SERVER_OK;
+		}
+	}
+	return TRANSACTION_NOT_FOUND;
+}; 
 
 int main()
 
@@ -84,5 +117,5 @@ int main()
 	*t->PAN = "2564856474123698";
 	/*printf("%s", (const char*)t->cardHolderData.PAN);*/
 	//recieveTransactionData(t);
-	isValidAccount(*t, accounts[0]);
+	/*isValidAccount(*t, accounts[0]);*/
 }
