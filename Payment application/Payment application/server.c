@@ -1,5 +1,13 @@
 #include "Server.h"
 
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
+#include <stdint.h>
+
+
 ST_accountsDB_t accounts[255] = {
 	{2000.0,RUNNING,"2564856474123698"},
 	{51313.2,BLOCKED,"6214785236541234"},
@@ -13,17 +21,39 @@ ST_accountsDB_t accounts[255] = {
 	{9851.1,RUNNING,"99558824446663"},
 };
 
+//accounts[1] = { {2000.0,RUNNING,"2564856474123698"} };
 
+ST_transaction_t transaction[255] = {0,0,DECLINED_INSUFFECIENT_FUND,0};
+
+//bool account_found(ST_transaction_t* transData, ST_accountsDB_t arr[]) {
+//	for (int i = 1; i < 255; i++)
+//	{
+//		if (arr[i].PAN==transData->cardHolderData.PAN);
+//			return true;
+//	}
+//	return false;
+//};
 
 EN_transState_t recieveTransactionData(ST_transaction_t* transData)
 {
-	printf("hi shehab");
-	return APPROVED;
+	//if (transData->cardHolderData.PAN==accounts[0].PAN)            // first if doesn't work//////////////
+	//{
+	//	float account_amount 
+	//	if(isBelowMaxAmount(transData) || transData->terminalData.transAmount> transData.)
+	//}
+
+	return FRAUD_CARD;
 }
 
 EN_serverError_t isValidAccount(ST_CardData_t cardData, ST_accountsDB_t accountRefrence)
 {
-	return SERVER_OK;
+
+	if (cardData.PAN == accountRefrence.PAN) {         // first if doesn't work//////////////
+		printf("found");
+	}
+	printf("not found");
+
+	return ACCOUNT_NOT_FOUND;
 }
 
 EN_serverError_t isBlockedAccount(ST_accountsDB_t* accountRefrence)
@@ -50,8 +80,9 @@ EN_serverError_t getTransaction(uint32_t transactionSequenceNumber, ST_transacti
 int main()
 
 {
-	ST_transaction_t* t = malloc(sizeof(t));
-
-	recieveTransactionData(t);
-
+	ST_CardData_t* t = malloc(sizeof(t));
+	*t->PAN = "2564856474123698";
+	/*printf("%s", (const char*)t->cardHolderData.PAN);*/
+	//recieveTransactionData(t);
+	isValidAccount(*t, accounts[0]);
 }

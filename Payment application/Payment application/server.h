@@ -1,6 +1,6 @@
 #ifndef server
 #define server
-
+//
 //#include "D:\Git\Payment-application\Payment application\Payment application/Card.h"
 #include "D:\Git\Payment-application\Payment application\Payment application/Terminal.h"
 

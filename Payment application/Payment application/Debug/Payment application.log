@@ -1,2 +1,8 @@
 ﻿  server.c
+D:\Git\Payment-application\Payment application\Payment application\server.c(13,1): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Git\Payment-application\Payment application\Payment application\server.c(15,1): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Git\Payment-application\Payment application\Payment application\server.c(16,1): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Git\Payment-application\Payment application\Payment application\server.c(17,1): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Git\Payment-application\Payment application\Payment application\server.c(21,1): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Git\Payment-application\Payment application\Payment application\server.c(84,30): warning C4047: '=': 'uint8_t' differs in levels of indirection from 'char [17]'
   Payment application.vcxproj -> D:\Git\Payment-application\Payment application\Debug\Payment application.exe
