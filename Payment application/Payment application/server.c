@@ -31,6 +31,7 @@ ST_transaction_t transactions[255] = {0,0,DECLINED_INSUFFECIENT_FUND,0};
 //Done
 EN_transState_t recieveTransactionData(ST_transaction_t* transData)
 {
+	
 	if (isValidAccount(transData->cardHolderData,accounts)== SERVER_OK)         
 	{
 
@@ -45,6 +46,10 @@ EN_transState_t recieveTransactionData(ST_transaction_t* transData)
 			return INTERNAL_SERVER_ERROR;
 		}
 		else {
+
+			//Updating DB with the new balance
+			accounts[index].balance = accounts[index].balance - transData->terminalData.transAmount;
+
 			return APPROVED;
 		}
 	}
