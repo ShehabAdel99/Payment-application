@@ -40,7 +40,7 @@ EN_transState_t recieveTransactionData(ST_transaction_t* transData)
 		if (isBlockedAccount(accounts) == BLOCKED_ACCOUNT) {
 			return DECLINED_STOLEN_CARD;
 		}
-
+		
 		//// Check if the amount is available
 		if (isBelowMaxAmount(transData) == EXCEED_MAX_AMOUNT || isAmountAvailabe(transData)== LOW_BALANCE) {
 			return DECLINED_INSUFFECIENT_FUND;
@@ -143,10 +143,10 @@ EN_serverError_t saveTransaction(ST_transaction_t* transData)
 	}
 	else
 	{
-		transData->transactionSequenceNumber = (transactions[index - 1].transactionSequenceNumber + 1);
+		transData->transactionSequenceNumber = (transactions[trans - 1].transactionSequenceNumber + 1);
 	}
 	//// Saving sequnce number
-	transactions[index].transactionSequenceNumber = transData->transactionSequenceNumber;
+	transactions[trans].transactionSequenceNumber = transData->transactionSequenceNumber;
 
 	trans++; // Move to the next index in Transactions DB
 
