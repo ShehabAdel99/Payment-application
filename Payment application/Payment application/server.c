@@ -21,24 +21,15 @@ ST_accountsDB_t accounts[255] = {
 	{9851.1,RUNNING,"99558824446663"},
 };
 
-int index;      // get needed account index in DB
+int index;      // gets needed account index in DB
 
 ST_transaction_t transactions[255] = {0,0,DECLINED_INSUFFECIENT_FUND,0};
-
-//bool account_found(ST_transaction_t* transData, ST_accountsDB_t arr[]) {
-//	for (int i = 1; i < 255; i++)
-//	{
-//		if (arr[i].PAN==transData->cardHolderData.PAN);
-//			return true;
-//	}
-//	return false;
-//};
 
 
 //under progress
 EN_transState_t recieveTransactionData(ST_transaction_t* transData)
 {
-	if (isValidAccount(transData->cardHolderData,accounts)== SERVER_OK)          // first if doesn't work//////////////
+	if (isValidAccount(transData->cardHolderData,accounts)== SERVER_OK)         
 	{
 
 		if (isBelowMaxAmount(transData) == EXCEED_MAX_AMOUNT || transData->terminalData.transAmount > accounts[index].balance) {
@@ -47,7 +38,7 @@ EN_transState_t recieveTransactionData(ST_transaction_t* transData)
 		else if (isBlockedAccount(accounts) == BLOCKED_ACCOUNT) {
 			return DECLINED_STOLEN_CARD;
 		}
-		else if (saveTransaction(transData)   /*== ? ? )*/ )
+		else if (saveTransaction(transData)   /*== ? ? )*/ )     /*Waiting for saveTransaction function*/
 		{
 
 		}
