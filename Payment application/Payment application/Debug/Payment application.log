@@ -1,11 +1,9 @@
-﻿  Card.c
-  Terminal.c
-  server.c
+﻿  server.c
 D:\Git\Payment-application\Payment application\Payment application\server.c(13,1): warning C4305: 'initializing': truncation from 'double' to 'float'
 D:\Git\Payment-application\Payment application\Payment application\server.c(15,1): warning C4305: 'initializing': truncation from 'double' to 'float'
 D:\Git\Payment-application\Payment application\Payment application\server.c(16,1): warning C4305: 'initializing': truncation from 'double' to 'float'
 D:\Git\Payment-application\Payment application\Payment application\server.c(17,1): warning C4305: 'initializing': truncation from 'double' to 'float'
 D:\Git\Payment-application\Payment application\Payment application\server.c(21,1): warning C4305: 'initializing': truncation from 'double' to 'float'
-D:\Git\Payment-application\Payment application\Payment application\server.c(37,33): warning C4133: 'function': incompatible types - from 'ST_transaction_t *' to 'ST_terminalData_t *'
-  Generating Code...
+D:\Git\Payment-application\Payment application\Payment application\server.c(34,30): warning C4133: 'function': incompatible types - from 'ST_transaction_t *' to 'ST_CardData_t *'
+D:\Git\Payment-application\Payment application\Payment application\server.c(43,33): warning C4133: 'function': incompatible types - from 'ST_transaction_t *' to 'ST_terminalData_t *'
   Payment application.vcxproj -> D:\Git\Payment-application\Payment application\Debug\Payment application.exe
