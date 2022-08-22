@@ -22,11 +22,13 @@ ST_accountsDB_t accounts[255] = {
 };
 
 int index;      // gets needed account index in DB
+int trans = 0;
+
 
 ST_transaction_t transactions[255] = {0,0,DECLINED_INSUFFECIENT_FUND,0};
 
 
-//under progress
+//Done
 EN_transState_t recieveTransactionData(ST_transaction_t* transData)
 {
 	if (isValidAccount(transData->cardHolderData,accounts)== SERVER_OK)         
@@ -38,9 +40,9 @@ EN_transState_t recieveTransactionData(ST_transaction_t* transData)
 		else if (isBlockedAccount(accounts) == BLOCKED_ACCOUNT) {
 			return DECLINED_STOLEN_CARD;
 		}
-		else if (saveTransaction(transData)   /*== ? ? )*/ )     /*Waiting for saveTransaction function*/
+		else if (saveTransaction(transData)   == SAVING_FAILED)     
 		{
-
+			return INTERNAL_SERVER_ERROR;
 		}
 		else {
 			return APPROVED;
@@ -99,11 +101,37 @@ EN_serverError_t isAmountAvailabe(ST_terminalData_t* termData)
 };
 
 
-//under progress
+//Done
 EN_serverError_t saveTransaction(ST_transaction_t* transData)
 {
+	// Saving transaction data to transactions DB
+	transactions[trans].cardHolderData = transData->cardHolderData;
+	transactions[trans].terminalData = transData->terminalData;
+	transactions[trans].transState = transData->transState;
 
-	return SERVER_OK;
+	// Giving a sequence number to a transaction
+	if (trans == 0)
+	{
+		transData->transactionSequenceNumber = 1;
+	}
+	else
+	{
+		transData->transactionSequenceNumber = (transactions[index - 1].transactionSequenceNumber + 1);
+	}
+	// Saving sequnce number
+	transactions[index].transactionSequenceNumber = transData->transactionSequenceNumber;
+
+	trans++;
+
+	// Checking if the transaction is saved
+	if (getTransaction(transData->transactionSequenceNumber, transData) == TRANSACTION_NOT_FOUND)
+	{
+		return SAVING_FAILED;
+	}
+	else
+	{
+		return SERVER_OK;
+	}
 };
 
 
@@ -113,7 +141,7 @@ EN_serverError_t getTransaction(uint32_t transactionSequenceNumber, ST_transacti
 	for (int i = 0; i < 255; i++)
 	{
 		if (transData->transactionSequenceNumber == transactions[i].transactionSequenceNumber) {
-
+			printf("Transaction data is at index %d in the transactions DB.", i);
 			return SERVER_OK;
 		}
 	}
@@ -124,6 +152,14 @@ int main()
 
 {
 	ST_CardData_t* t = malloc(sizeof(t));
-	strcpy(t->PAN, "2564856474123698");
-	isValidAccount(*t, accounts);
+
+	// isValidAccount function test
+	
+	//printf("entering valid account\n");
+	//strcpy(t->PAN, "2564856474123698");
+	//isValidAccount(*t, accounts);
+	//printf("entering invalid account\n");
+	//strcpy(t->PAN, "4444");
+	//isValidAccount(*t, accounts);
+
 }
