@@ -17,7 +17,7 @@ uint8_t CardExpiryDate[6];
 
 typedef enum EN_CardError
 {
-    CARD_OK,WRONG_NAME,WRONG_EXP_DATE,WRONG_PAN //Wrong name was written twice 
+    CARD_OK,WRONG_NAME,WRONG_EXP_DATE,WRONG_PAN 
 } EN_CardError_t;
 
 
