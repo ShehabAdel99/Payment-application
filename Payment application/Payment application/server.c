@@ -42,7 +42,7 @@ EN_transState_t recieveTransactionData(ST_transaction_t* transData)
 		}
 
 		//// Check if the amount is available
-		if (isBelowMaxAmount(transData) == EXCEED_MAX_AMOUNT || transData->terminalData.transAmount > accounts[index].balance) {
+		if (isBelowMaxAmount(transData) == EXCEED_MAX_AMOUNT || isAmountAvailabe(transData)== LOW_BALANCE) {
 			return DECLINED_INSUFFECIENT_FUND;
 		}
 		//else
