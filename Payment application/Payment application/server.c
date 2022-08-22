@@ -7,7 +7,7 @@
 #include <string.h>
 #include <stdint.h>
 
-
+// Creating valid accounts DB
 ST_accountsDB_t accounts[255] = {
 	{2000.0,RUNNING,"2564856474123698"},
 	{51313.2,BLOCKED,"6214785236541234"},
@@ -28,11 +28,10 @@ int trans = 0;
 ST_transaction_t transactions[255] = {0,0,DECLINED_INSUFFECIENT_FUND,0};
 
 
-//Done
 EN_transState_t recieveTransactionData(ST_transaction_t* transData)
 {
 	
-	if (isValidAccount(transData->cardHolderData,accounts)== SERVER_OK)         
+	if (isValidAccount(transData,accounts)== SERVER_OK)         
 	{
 
 		if (isBelowMaxAmount(transData) == EXCEED_MAX_AMOUNT || transData->terminalData.transAmount > accounts[index].balance) {
@@ -61,12 +60,12 @@ EN_transState_t recieveTransactionData(ST_transaction_t* transData)
 
 
 //Done
-EN_serverError_t isValidAccount(ST_CardData_t cardData, ST_accountsDB_t* accountRefrence)
+EN_serverError_t isValidAccount(ST_CardData_t *cardData, ST_accountsDB_t* accountRefrence)
 {
 
 	for (int i = 0; i < 255; i++)
 	{
-		if (strcmp(cardData.PAN, accountRefrence[i].PAN) == 0) {      
+		if (strcmp(cardData->PAN, accountRefrence[i].PAN) == 0) {      
 			index = i;
 			printf("found");
 			return SERVER_OK;
@@ -162,9 +161,9 @@ int main()
 	
 	//printf("entering valid account\n");
 	//strcpy(t->PAN, "2564856474123698");
-	//isValidAccount(*t, accounts);
+	//isValidAccount(t, accounts);
 	//printf("entering invalid account\n");
 	//strcpy(t->PAN, "4444");
-	//isValidAccount(*t, accounts);
+	//isValidAccount(t, accounts);
 
 }
