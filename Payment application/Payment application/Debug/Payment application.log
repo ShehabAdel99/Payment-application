@@ -4,5 +4,9 @@ D:\Git\Payment-application\Payment application\Payment application\server.c(15,1
 D:\Git\Payment-application\Payment application\Payment application\server.c(16,1): warning C4305: 'initializing': truncation from 'double' to 'float'
 D:\Git\Payment-application\Payment application\Payment application\server.c(17,1): warning C4305: 'initializing': truncation from 'double' to 'float'
 D:\Git\Payment-application\Payment application\Payment application\server.c(21,1): warning C4305: 'initializing': truncation from 'double' to 'float'
-D:\Git\Payment-application\Payment application\Payment application\server.c(102,30): warning C4047: '=': 'uint8_t' differs in levels of indirection from 'char [17]'
+D:\Git\Payment-application\Payment application\Payment application\server.c(44,33): warning C4133: 'function': incompatible types - from 'ST_transaction_t *' to 'ST_terminalData_t *'
+D:\Git\Payment-application\Payment application\Payment application\server.c(47,37): warning C4047: 'function': 'ST_accountsDB_t **' differs in levels of indirection from 'ST_accountsDB_t [255]'
+D:\Git\Payment-application\Payment application\Payment application\server.c(47,29): warning C4024: 'isBlockedAccount': different types for formal and actual parameter 1
+D:\Git\Payment-application\Payment application\Payment application\server.c(85,52): warning C4028: formal parameter 1 different from declaration
+D:\Git\Payment-application\Payment application\Payment application\server.c(61): warning C4715: 'recieveTransactionData': not all control paths return a value
   Payment application.vcxproj -> D:\Git\Payment-application\Payment application\Debug\Payment application.exe

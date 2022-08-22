@@ -38,23 +38,37 @@ ST_transaction_t transactions[255] = {0,0,DECLINED_INSUFFECIENT_FUND,0};
 //under progress
 EN_transState_t recieveTransactionData(ST_transaction_t* transData)
 {
-	//if (transData->cardHolderData.PAN==accounts[0].PAN)            // first if doesn't work//////////////
-	//{
-	//	float account_amount 
-	//	if(isBelowMaxAmount(transData) || transData->terminalData.transAmount> transData.)
-	//}
+	if (isValidAccount(transData->cardHolderData,accounts)== SERVER_OK)          // first if doesn't work//////////////
+	{
 
-	return FRAUD_CARD;
+		if (isBelowMaxAmount(transData) == EXCEED_MAX_AMOUNT || transData->terminalData.transAmount > accounts[index].balance) {
+			return DECLINED_INSUFFECIENT_FUND;
+		}
+		else if (isBlockedAccount(accounts) == BLOCKED_ACCOUNT) {
+			return DECLINED_STOLEN_CARD;
+		}
+		else if (saveTransaction(transData)   /*== ? ? )*/ )
+		{
+
+		}
+		else {
+			return APPROVED;
+		}
+	}
+	else {
+		return FRAUD_CARD;
+	}
 };
 
 
-//under progress
-EN_serverError_t isValidAccount(ST_CardData_t cardData, ST_accountsDB_t accountRefrence[])
+
+//Done
+EN_serverError_t isValidAccount(ST_CardData_t cardData, ST_accountsDB_t* accountRefrence)
 {
 
 	for (int i = 0; i < 255; i++)
 	{
-		if (cardData.PAN == accountRefrence[i].PAN) {       // first if doesn't work//////////////
+		if (strcmp(cardData.PAN, accountRefrence[i].PAN) == 0) {      
 			index = i;
 			printf("found");
 			return SERVER_OK;
@@ -68,12 +82,15 @@ EN_serverError_t isValidAccount(ST_CardData_t cardData, ST_accountsDB_t accountR
 
 
 //Done
-EN_serverError_t isBlockedAccount(ST_accountsDB_t* accountRefrence[])
+EN_serverError_t isBlockedAccount(ST_accountsDB_t* accountRefrence)
 {
-	if (accountRefrence[index]->state == BLOCKED) {
+	if (accountRefrence[index].state == BLOCKED) {
 		return BLOCKED_ACCOUNT;
 	}
-	return SERVER_OK;
+	else
+	{
+		return SERVER_OK;
+	}
 
 };
 
@@ -84,8 +101,10 @@ EN_serverError_t isAmountAvailabe(ST_terminalData_t* termData)
 	if (termData->transAmount > accounts[index].balance) {
 		return LOW_BALANCE;
 	}
-
-	return SERVER_OK;
+	else
+	{
+		return SERVER_OK;
+	}
 };
 
 
@@ -114,8 +133,6 @@ int main()
 
 {
 	ST_CardData_t* t = malloc(sizeof(t));
-	*t->PAN = "2564856474123698";
-	/*printf("%s", (const char*)t->cardHolderData.PAN);*/
-	//recieveTransactionData(t);
-	/*isValidAccount(*t, accounts[0]);*/
+	strcpy(t->PAN, "2564856474123698");
+	isValidAccount(*t, accounts);
 }
