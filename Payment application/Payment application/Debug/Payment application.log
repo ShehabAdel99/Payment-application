@@ -1,9 +1,36 @@
-﻿  server.c
+﻿  main.c
+D:\Git\Payment-application\Payment application\Payment application\Server.c(13,1): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Git\Payment-application\Payment application\Payment application\Server.c(15,1): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Git\Payment-application\Payment application\Payment application\Server.c(16,1): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Git\Payment-application\Payment application\Payment application\Server.c(17,1): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Git\Payment-application\Payment application\Payment application\Server.c(21,1): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\Git\Payment-application\Payment application\Payment application\Server.c(36,30): warning C4133: 'function': incompatible types - from 'ST_transaction_t *' to 'ST_CardData_t *'
+D:\Git\Payment-application\Payment application\Payment application\Server.c(45,33): warning C4133: 'function': incompatible types - from 'ST_transaction_t *' to 'ST_terminalData_t *'
+D:\Git\Payment-application\Payment application\Payment application\Server.c(45,85): warning C4133: 'function': incompatible types - from 'ST_transaction_t *' to 'ST_terminalData_t *'
+  server.c
 D:\Git\Payment-application\Payment application\Payment application\server.c(13,1): warning C4305: 'initializing': truncation from 'double' to 'float'
 D:\Git\Payment-application\Payment application\Payment application\server.c(15,1): warning C4305: 'initializing': truncation from 'double' to 'float'
 D:\Git\Payment-application\Payment application\Payment application\server.c(16,1): warning C4305: 'initializing': truncation from 'double' to 'float'
 D:\Git\Payment-application\Payment application\Payment application\server.c(17,1): warning C4305: 'initializing': truncation from 'double' to 'float'
 D:\Git\Payment-application\Payment application\Payment application\server.c(21,1): warning C4305: 'initializing': truncation from 'double' to 'float'
-D:\Git\Payment-application\Payment application\Payment application\server.c(34,30): warning C4133: 'function': incompatible types - from 'ST_transaction_t *' to 'ST_CardData_t *'
-D:\Git\Payment-application\Payment application\Payment application\server.c(43,33): warning C4133: 'function': incompatible types - from 'ST_transaction_t *' to 'ST_terminalData_t *'
-  Payment application.vcxproj -> D:\Git\Payment-application\Payment application\Debug\Payment application.exe
+D:\Git\Payment-application\Payment application\Payment application\server.c(36,30): warning C4133: 'function': incompatible types - from 'ST_transaction_t *' to 'ST_CardData_t *'
+D:\Git\Payment-application\Payment application\Payment application\server.c(45,33): warning C4133: 'function': incompatible types - from 'ST_transaction_t *' to 'ST_terminalData_t *'
+D:\Git\Payment-application\Payment application\Payment application\server.c(45,85): warning C4133: 'function': incompatible types - from 'ST_transaction_t *' to 'ST_terminalData_t *'
+  Generating Code...
+main.obj : error LNK2005: _getCardHolderName already defined in Card.obj
+main.obj : error LNK2005: _getCardPAN already defined in Card.obj
+main.obj : error LNK2005: _getExpiryDate already defined in Card.obj
+server.obj : error LNK2005: _getTransaction already defined in main.obj
+server.obj : error LNK2005: _isAmountAvailabe already defined in main.obj
+server.obj : error LNK2005: _isBlockedAccount already defined in main.obj
+server.obj : error LNK2005: _isValidAccount already defined in main.obj
+server.obj : error LNK2005: _recieveTransactionData already defined in main.obj
+server.obj : error LNK2005: _saveTransaction already defined in main.obj
+server.obj : error LNK2005: _accounts already defined in main.obj
+server.obj : error LNK2005: _transactions already defined in main.obj
+server.obj : error LNK2005: _trans already defined in main.obj
+Terminal.obj : error LNK2005: _SetMaxAmount already defined in main.obj
+Terminal.obj : error LNK2005: _getTransactionDate already defined in main.obj
+Terminal.obj : error LNK2005: _isBelowMaxAmount already defined in main.obj
+Terminal.obj : error LNK2005: _isCardExpired already defined in main.obj
+D:\Git\Payment-application\Payment application\Debug\Payment application.exe : fatal error LNK1169: one or more multiply defined symbols found
