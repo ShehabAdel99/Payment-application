@@ -139,12 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Amr.cpp" />
     <ClCompile Include="Card.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="server.c" />
     <ClCompile Include="Terminal.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Amr.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="server.h" />
